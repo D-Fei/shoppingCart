@@ -20,8 +20,8 @@ public interface FormMapper {
      * @mbg.generated Mon Jul 20 23:01:41 CST 2020
      */
     @Delete({
-        "delete from form",
-        "where id = #{id,jdbcType=INTEGER}"
+            "delete from form",
+            "where id = #{id,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer id);
 

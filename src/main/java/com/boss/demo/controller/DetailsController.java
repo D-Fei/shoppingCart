@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @RestController
 @RequestMapping("/demo/details")
@@ -17,9 +18,30 @@ public class DetailsController {
     @Autowired
     DetailsMapper detailsMapper;
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Details getUser(HttpServletRequest request, HttpServletResponse response , @PathVariable("id") Integer detailsId) {
-        Details details = (Details) detailsMapper.selectByPrimaryKey(detailsId);
+    /**
+     * 根据id查询明细
+     * @param request
+     * @param response
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
+    public Details getDetails(HttpServletRequest request, HttpServletResponse response , @PathVariable("id") Integer id) {
+        Details details = (Details) detailsMapper.selectByPrimaryKey(id);
+        System.out.println(details);
+        return details;
+    }
+
+    /**
+     * 根据detailId查询明细
+     * @param request
+     * @param response
+     * @param detailsId
+     * @return
+     */
+    @RequestMapping(value = "/gets/{detailsId}",method = RequestMethod.GET)
+    public List<Details> getAllDetails(HttpServletRequest request,HttpServletResponse response ,@PathVariable("detailsId") Integer detailsId) {
+        List<Details> details = detailsMapper.selectAll(detailsId);
         System.out.println(details);
         return details;
     }

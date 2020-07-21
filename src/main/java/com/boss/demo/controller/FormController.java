@@ -17,6 +17,13 @@ public class FormController {
     @Autowired
     FormMapper formMapper;
 
+    /**
+     * 根据id查询form
+     * @param request
+     * @param response
+     * @param formId
+     * @return
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Form getUser(HttpServletRequest request, HttpServletResponse response , @PathVariable("id") Integer formId) {
         Form form = (Form) formMapper.selectByPrimaryKey(formId);
