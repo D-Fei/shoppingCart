@@ -14,13 +14,30 @@ public class UserController {
     @Autowired
     UserMapper userMapper;
 
+    /**
+     * 根据id查询user
+     * @param request
+     * @param response
+     * @param userId
+     * @return
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public User getUser(HttpServletRequest request, HttpServletResponse response ,@PathVariable("id") Integer userId) {
         User user = (User) userMapper.selectByPrimaryKey(userId);
         System.out.println(user);
         return user;
     }
-    @RequestMapping(value = "/123")
+
+    /**
+     * 怎加user
+     * @param request
+     * @param response
+     * @param userId
+     * @param username
+     * @param userage
+     * @return
+     */
+    @RequestMapping(value = "/123")  //https://localhost:8080/demo/user/123?id=#&name=#&age=#
     public Integer addUser(HttpServletRequest request, HttpServletResponse response , @RequestParam(name = "id") Integer userId, @RequestParam(name ="name") String username, @RequestParam(name = "age") Integer userage){
         User user = new User();
         user.setId(userId);
