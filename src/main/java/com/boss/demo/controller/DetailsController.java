@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -44,5 +47,28 @@ public class DetailsController {
         List<Details> details = detailsMapper.selectAll(detailsId);
         System.out.println(details);
         return details;
+    }
+
+    /**
+     * 添加明细
+     * @param details
+     * @param session
+     */
+    @RequestMapping("/session")
+    public String addDetails(Details details, HttpSession session) {
+        String detailId = details.getDetailid()+"";
+        if (session.getAttribute(detailId) != null) {
+            HashMap<Integer, List<Details>> map = (HashMap<Integer, List<Details>>) session.getAttribute(detailId);
+            List<Details> detailsList = map.get(details.getDetailid());
+            detailsList.add(details);
+            map.put(details.getDetailid(), detailsList);
+            session.setAttribute(detailId,map);
+        }
+        HashMap<Integer, List<Details>> map = new HashMap<>();
+        List<Details> detailsList = new ArrayList<>();
+        detailsList.add(details);
+        map.put(details.getDetailid(), detailsList);
+        session.setAttribute(detailId,map);
+        return "OK";
     }
 }

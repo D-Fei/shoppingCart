@@ -2,6 +2,7 @@ package com.boss.demo.db.model;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Form {
 
@@ -10,13 +11,13 @@ public class Form {
     private String date;
     private Integer detailid;
     private String user;
-    private ArrayList<Details> details;
+    private HashMap details;
 
-    public ArrayList<Details> getDetails() {
+    public HashMap getDetails() {
         return details;
     }
 
-    public void setDetails(ArrayList<Details> details) {
+    public void setDetails(HashMap details) {
         this.details = details;
     }
 
